@@ -32,9 +32,13 @@ jobs:
           docker build -t my-nodejs-app:${{ github.sha }} .
 
       - name: Run Trivy scan for vulnerabilities
-        uses: aquasecurity/trivy-action@v0.16
+        uses: aquasecurity/trivy-action@0.16.0
         with:
-          image-ref: my-nodejs-app:${{ github.sha }}
+          image-ref: ${{ secrets.DOCKER_HUB_USERNAME }}/my-nodejs-app:${{ github.sha }}
+          format: 'table'
+          exit-code: '1'
+          severity: 'HIGH,CRITICAL'
+          ignore-unfixed: true
           
       - name: Push Docker image to Docker Hub
         run: |
