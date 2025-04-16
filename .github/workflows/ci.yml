@@ -34,7 +34,7 @@ jobs:
       - name: Run Trivy scan for vulnerabilities
         uses: aquasecurity/trivy-action@0.16.0
         with:
-          image-ref: ${{ secrets.DOCKER_HUB_USERNAME }}/my-nodejs-app:${{ github.sha }}
+          image-ref: my-nodejs-app:${{ github.sha }}
           format: 'table'
           exit-code: '1'
           severity: 'HIGH,CRITICAL'
